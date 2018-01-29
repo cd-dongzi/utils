@@ -1,5 +1,4 @@
-#  常用工具类的封装
-
+# javascript 总结（常用工具类的封装）
 ## 前言
     因为工作中经常用到这些方法，所有便把这些方法进行了总结。
 
@@ -157,7 +156,7 @@ checkStr (str, type) {
 ```
 
 
-### 2. Date 时间操作
+### 2. Date
 
 ```
 /**
@@ -381,7 +380,7 @@ getDayOfYearWeek (time) {
 ```
 
 
-### 3. Array 数组操作
+### 3. Array
 
 ```
 /*判断一个元素是否在数组中*/
@@ -822,7 +821,7 @@ changeToChinese (Num) {
 ```
 
 
-### 6. Http 请求操作
+### 6. Http 
 
 ```
 /**
@@ -941,7 +940,7 @@ fetch(url, setting) {
 ```
 
 
-### 7. Dom DOM操作
+### 7. DOM
 
 ```
 $ (selector){ 
@@ -2094,3 +2093,8 @@ input[type="text"] {
     background-position: center center;
 }
 ```
+
+## 小结
+    以上都是经常用到的方法
+    > [github](https://github.com/cd-dongzi/utils)
+    > [博客地址](http://dzblog.cn/article/5a6f48afad4db304be1e7a5f)
