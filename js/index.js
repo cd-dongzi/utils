@@ -1128,7 +1128,7 @@ class OtherFn {
     /*获取网址参数*/
     getURL(name){
         var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-        var r = window.location.search.substr(1).match(reg);
+        var r = decodeURI(window.location.search).substr(1).match(reg);
         if(r!=null) return  r[2]; return null;
     }
 
