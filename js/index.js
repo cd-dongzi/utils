@@ -453,10 +453,15 @@ class ArrayFn {
         if ( Array.hasOwnProperty('from') ) {
             return Array.from(new Set(arr))
         }else{
-            r = []
+            var r = [], NaNBol = true
             for(var i=0; i < arr.length; i++) {
-                if(r.indexOf(arr[i]) === -1) {
-                    r.push(arr[i])
+                if (arr[i] !== arr[i]) {
+                    if (NaNBol && r.indexOf(arr[i]) === -1) {
+                        r.push(arr[i])
+                        NaNBol = false
+                    }
+                }else{
+                    if(r.indexOf(arr[i]) === -1) r.push(arr[i])
                 }
             }
             return r

@@ -71,15 +71,20 @@ class ArrayFn {
             }
             return r;
         }
-        // 注：上面 else 里面的排重并不能区分 2 和 '2'，但能减少用indexOf带来的性能,暂时没找到替代的方法。。。
+        // 注：上面 else 里面的排重并不能区分 2 和 '2'，但能减少用indexOf带来的性能
         /* 正确排重
         if ( Array.hasOwnProperty('from') ) {
             return Array.from(new Set(arr))
         }else{
-            r = []
+            var r = [], NaNBol = true
             for(var i=0; i < arr.length; i++) {
-                if(r.indexOf(arr[i]) === -1) {
-                    r.push(arr[i])
+                if (arr[i] !== arr[i]) {
+                    if (NaNBol && r.indexOf(arr[i]) === -1) {
+                        r.push(arr[i])
+                        NaNBol = false
+                    }
+                }else{
+                    if(r.indexOf(arr[i]) === -1) r.push(arr[i])
                 }
             }
             return r
