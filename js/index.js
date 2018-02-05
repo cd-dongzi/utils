@@ -113,7 +113,7 @@ class TypeFn {
             case 'tel':     //座机
                 return /^(0\d{2,3}-\d{7,8})(-\d{1,4})?$/.test(str);
             case 'card':    //身份证
-                return /^\d{15}|\d{18}$/.test(str);
+                return /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(str);
             case 'pwd':     //密码以字母开头，长度在6~18之间，只能包含字母、数字和下划线
                 return /^[a-zA-Z]\w{5,17}$/.test(str)
             case 'postal':  //邮政编码
