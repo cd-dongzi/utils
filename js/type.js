@@ -7,18 +7,6 @@ class TypeFn {
         return Object.prototype.toString.call(o).slice(8, -1) === 'Number'
     }
 
-    isObj (o) { //是否对象
-        return Object.prototype.toString.call(o).slice(8, -1) === 'Object'
-    }
-
-    isArray (o) { //是否数组
-        return Object.prototype.toString.call(o).slice(8, -1) === 'Array'
-    }
-
-    isDate (o) { //是否时间
-        return Object.prototype.toString.call(o).slice(8, -1) === 'Date'
-    }
-
     isBoolean (o) { //是否boolean
         return Object.prototype.toString.call(o).slice(8, -1) === 'Boolean'
     }
@@ -34,6 +22,39 @@ class TypeFn {
     isUndefined (o) { //是否undefined
         return Object.prototype.toString.call(o).slice(8, -1) === 'Undefined'
     }
+
+    isObj (o) { //是否对象
+        return Object.prototype.toString.call(o).slice(8, -1) === 'Object'
+    }
+
+    isArray (o) { //是否数组
+        return Object.prototype.toString.call(o).slice(8, -1) === 'Array'
+    }
+
+    isDate (o) { //是否时间
+        return Object.prototype.toString.call(o).slice(8, -1) === 'Date'
+    }
+
+    isRegExp (o) { //是否正则
+        return Object.prototype.toString.call(o).slice(8, -1) === 'RegExp'
+    }
+
+    isError (o) { //是否错误对象
+        return Object.prototype.toString.call(o).slice(8, -1) === 'Error'
+    }
+
+    isSymbol (o) { //是否Symbol函数
+        return Object.prototype.toString.call(o).slice(8, -1) === 'Symbol'
+    }
+
+    isPromise (o) { //是否Promise对象
+        return Object.prototype.toString.call(o).slice(8, -1) === 'Promise'
+    }
+
+    isSet (o) { //是否Set对象
+        return Object.prototype.toString.call(o).slice(8, -1) === 'Set'
+    }
+
 
     isFalse (o) {
         if (o == '' || o == undefined || o == null || o == 'null' || o == 'undefined' || o == 0 || o == false || o == NaN) return true
