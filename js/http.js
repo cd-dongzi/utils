@@ -88,14 +88,14 @@ function ajax(setting){
 
         })
 */
-function fetchHttp(url, setting) {
+function fetchHttp(url, setting = {}) {
     //设置参数的初始值
     let opts={
         method: (setting.method || 'GET').toUpperCase(), //请求方式
         headers : setting.headers  || {}, // 请求头设置
         credentials : setting.credentials  || true, // 设置cookie是否一起发送
         body: setting.body || {},
-        mode : setting.mode  || 'no-cors', // 可以设置 cors, no-cors, same-origin
+        mode : setting.mode  || 'cors', // 可以设置 cors, no-cors, same-origin
         redirect : setting.redirect  || 'follow', // follow, error, manual
         cache : setting.cache  || 'default' // 设置 cache 模式 (default, reload, no-cache)
     }
@@ -116,7 +116,6 @@ function fetchHttp(url, setting) {
     }else{
         setting.body = data || {}
     }
-
     return new Promise( (resolve, reject) => {
         fetch(url, opts).then( async res => {
             let data = dataType === 'text' ? await res.text() :
@@ -126,7 +125,6 @@ function fetchHttp(url, setting) {
             reject(e)
         })
     })
-    
 }
 
 
