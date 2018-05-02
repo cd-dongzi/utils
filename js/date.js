@@ -53,53 +53,59 @@ class DateFn {
      * @example   getMonths('2018-1-29', 6, 1)  // ->  ["2018-1", "2017-12", "2017-11", "2017-10", "2017-9", "2017-8", "2017-7"]
      */
     getMonths(time, len, direction) {
-        var mm = new Date(time).getMonth(),
+        var mm = new Date(time).getMonth()+1,
             yy = new Date(time).getFullYear(),
             direction = isNaN(direction) ? 3 : direction,
             index = mm;
+
         var cutMonth = function(index) {
-            if ( index <= len && index >= -len) {
-                return direction === 1 ? formatPre(index).concat(cutMonth(++index)):
-                    direction === 2 ? formatNext(index).concat(cutMonth(++index)):formatCurr(index).concat(cutMonth(++index))
-            }
-            return []
-        }
-        var formatNext = function(i) {
-            var y = Math.floor(i/12),
-                m = i%12
-            return [yy+y + '-' + (m+1)]
-        }
-        var formatPre = function(i) {
-            var y = Math.ceil(i/12),
-                m = i%12
-            m = m===0 ? 12 : m
-            return [yy-y + '-' + (13 - m)]
-        }
-        var formatCurr = function(i) {
-            var y = Math.floor(i/12),
-                yNext = Math.ceil(i/12),
-                m = i%12,
-                mNext = m===0 ? 12 : m
-            return [yy-yNext + '-' + (13 - mNext),yy+y + '-' + (m+1)]
-        }
-        // 数组去重
-        var unique = function(arr) {
-            if ( Array.hasOwnProperty('from') ) {
-                return Array.from(new Set(arr));
+            var arr 
+            if (direction === 1) {
+                arr = formatPre(index).reverse()
+            }else if(direction === 2) {
+                arr = formatNext(index)
             }else{
-                var n = {},r=[]; 
-                for(var i = 0; i < arr.length; i++){
-                    if (!n[arr[i]]){
-                        n[arr[i]] = true; 
-                        r.push(arr[i]);
-                    }
-                }
-                return r;
+                arr = formatPre(index).reverse().slice(len/2).concat(formatNext(index).slice(1, len/2+1))
             }
+            return arr.sort(function(t1, t2){
+                return new Date(t1).getTime() - new Date(t2).getTime()
+            })
         }
-        return direction !== 3 ? cutMonth(index) : unique(cutMonth(index).sort(function(t1, t2){
-            return new Date(t1).getTime() - new Date(t2).getTime()
-        }))
+
+        var formatPre = function(index) {
+            var currNum = index,
+                preNum = 0,
+                currArr = [],
+                preArr = []
+            if (index-len < 0) {
+                preNum = len-currNum   
+            }
+            for (var i = 0; i < currNum; i++) {
+                currArr.push([yy+'-'+(currNum-i)])
+            }
+            for (var i = 1; i <= preNum; i++) {
+                preArr.push([(yy-Math.ceil(i/12))+'-'+(12-(i-1)%12)])
+            }
+            return currArr.concat(preArr)
+        }
+
+        var formatNext = function(index) {
+            var currNum = 12-index,
+                nextNum = 0,
+                currArr = [],
+                nextArr = []
+            if (len-currNum > 0) {
+                nextNum = len-currNum   
+            }
+            for (var i = 0; i <= currNum; i++) {
+                currArr.push([yy+'-'+(index+i)])
+            }
+            for (var i = 1; i < nextNum; i++) {
+                nextArr.push([(yy+Math.ceil(i/12))+'-'+(i%13 === 0 ? 1:i%13)])
+            }
+            return currArr.concat(nextArr)
+        }
+        return cutMonth(index)
     }
 
 
