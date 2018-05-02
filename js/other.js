@@ -67,6 +67,47 @@ class OtherFn {
         return _clone(obj)
     }
 
+    /**
+     * 防抖动
+     * @param  {Function} fn        [执行的函数]
+     * @param  {[type]}   delay     [多少秒之后执行]
+     * @param  {[type]}   immediate [是否立即执行]
+     * @return {[type]}             []
+     */
+    debounce(fn, delay, immediate) {
+        var timeout;
+        return function() {
+            var context = this, args = arguments;
+            var later = function() {
+                timeout = null;
+                if (!immediate) fn.apply(context, args);
+            };
+            var callNow = immediate && !timeout;
+            clearTimeout(timeout);
+            timeout = setTimeout(later, delay);
+            if (callNow) fn.apply(context, args);
+        };
+    }
+
+    /**
+     * 节流
+     * @param  {[type]} func  [执行的函数]
+     * @param  {[type]} delay [多少秒之内执行一次]
+     * @return {[type]}       [description]
+     */
+    throttle (func,delay){
+        var prev = Date.now();
+        return function(){
+            var context = this;
+            var args = arguments;
+            var now = Date.now();
+            if(now-prev>=delay){
+                func.apply(context,args);
+                prev = Date.now();
+            }
+        }
+    }
+
     /*获取网址参数*/
     getUrlParams(name){
         var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
