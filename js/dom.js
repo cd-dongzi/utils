@@ -1,16 +1,16 @@
 class DomFn {
 
-    $ (selector){ 
+    $ (selector){
+        if (document.querySelecotor) return document.querySelector(selector);
+
         var type = selector.substring(0, 1);
+
         if (type === '#') {
-            if (document.querySelecotor) return document.querySelector(selector)
-                return document.getElementById(selector.substring(1))
-            
+            return document.getElementById(selector.substring(1));
         }else if (type === '.') {
-            if (document.querySelecotorAll) return document.querySelectorAll(selector)
-                return document.getElementsByClassName(selector.substring(1))
+            return document.getElementsByClassName(selector.substring(1));
         }else{
-            return document['querySelectorAll' ? 'querySelectorAll':'getElementsByTagName'](selector)
+            return document.getElementsByTagName(selector)s
         }
     } 
 
