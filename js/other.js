@@ -109,6 +109,57 @@ class OtherFn {
     }
 
     /**
+     * 圆形碰撞
+     * @param  {[type]} circle1 [description]
+     * @param  {[type]} circle2 [description]
+     * @return {[type]}         [description]
+     */
+    circleImpact(circle1,circle2) {
+        var r1 = circle1.offsetWidth / 2;
+        var l1 = circle1.offsetLeft;
+        var t1 = circle1.offsetTop;
+
+        var r2 = circle2.offsetWidth / 2;
+        var l2 = circle2.offsetLeft;
+        var t2 = circle2.offsetTop;
+
+        var a = (l1 + r1) - (l2 + r2);
+        var b = (t1 + r1) - (t2 + r2); 
+
+        var c = Math.sqrt(a * a + b * b);
+
+        if (c>=(r1+r2)) {
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    /**
+     * 矩形碰撞
+     * @param  {[type]} rect1 [description]
+     * @param  {[type]} rect2 [description]
+     * @return {[type]}       [description]
+     */
+    rectImpact(rect1, rect2) {
+        var t1 = rect1.offsetTop;  
+        var l1 = rect1.offsetLeft;  
+        var r1 = rect1.offsetLeft + rect1.offsetWidth;  
+        var b1 = rect1.offsetTop + rect1.offsetHeight;  
+
+        var t2 = rect2.offsetTop;  
+        var l2 = rect2.offsetLeft;  
+        var r2 = rect2.offsetLeft + rect2.offsetWidth;  
+        var b2 = rect2.offsetTop + rect2.offsetHeight; 
+
+        if(b1<t2 || l1>r2 || t1>b2 || r1<l2){// 表示没碰上  
+            return false
+        }else{  
+            return true
+        }  
+    }
+
+    /**
      * 图片压缩
      * @param  {[type]}   file [压缩文件]
      * @param  {[type]}   obj  [压缩参数]
