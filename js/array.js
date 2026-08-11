@@ -128,6 +128,27 @@ class ArrayFn {
         return arr;
     }
 
+    /**
+     * 将数组拆分为指定长度的子数组
+     * @param  {Array} arr
+     * @param  {Number} size
+     * @return {Array}
+     */
+    chunk (arr, size) {
+        if (!Array.isArray(arr)) {
+            throw new TypeError('arr must be an array');
+        }
+        if (typeof size !== 'number' || !isFinite(size) || Math.floor(size) !== size || size <= 0) {
+            throw new RangeError('size must be a positive integer');
+        }
+
+        var result = [];
+        for (var i = 0; i < arr.length; i += size) {
+            result.push(arr.slice(i, i + size));
+        }
+        return result;
+    }
+
     /*最大值*/
     max (arr) {
         return Math.max.apply(null, arr);
